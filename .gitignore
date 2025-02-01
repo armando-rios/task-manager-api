@@ -1,0 +1,3 @@
+# ignore files for task-manager crud with express and mongodb
+node_modules/
+.env

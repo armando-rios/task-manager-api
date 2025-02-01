@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^8.9.6"
+  },
+  "name": "task-manager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}
