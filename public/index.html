@@ -4,13 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <title>Task Manager</title>
-  <link href="style.css" rel="stylesheet">
+  <link href="./output.css" rel="stylesheet">
 </head>
 
-<body>
-  <h1>Task Manager</h1>
+<body class="bg-[#1E1E2E] text-[#CDD6F4] font-sans p-8">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold text-[#FAB387] mb-6">Task List</h1>
+
+    <button class="mb-4 px-4 py-2 bg-[#A6E3A1] text-[#1E1E2E] rounded-lg hover:bg-[#94E2D5] transition">+ Add
+      Task</button>
+
+    <div class="space-y-4" id="tasks">
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 
 </html>
