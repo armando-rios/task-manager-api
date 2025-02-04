@@ -9,4 +9,10 @@ const getTasks = async (req, res) => {
   }
 }
 
-module.exports = { getTasks };
+const createTask = (req, res) => {
+  const task = req.body
+  Task.create(task)
+  res.send("ok")
+}
+
+module.exports = { getTasks, createTask };

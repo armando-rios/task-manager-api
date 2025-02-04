@@ -5,8 +5,9 @@ const app = express()
 
 connectDB()
 
+app.use(express.json())
 app.use(express.static("public"))
 
-app.use('/api/tasks', taskRoutes)
+app.use('/api/tasks/', taskRoutes)
 
 module.exports = app
