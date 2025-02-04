@@ -17,10 +17,10 @@ async function getTasks() {
             <button class="bg-[#F38BA8] px-3 py-1 rounded-lg hover:bg-[#E06C75] transition">Delete</button>
           </div>
         </div>
-<p class="hidden mt-2 text-sm text-[#A6ADC8]">${task.description}</p>
+<p class="hidden desc mt-2 text-sm text-[#A6ADC8]">${task.description}</p>
       </div>
-  `;
-  })
+  `
+  }).join("")
 }
 
-getTasks(); 
+getTasks()

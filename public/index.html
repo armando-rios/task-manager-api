@@ -20,6 +20,18 @@
   </div>
 
   <script src="app.js"></script>
+
+  <script>
+    function toggleTaskDetails(taskElement) {
+      const description = taskElement.querySelector('p.desc');
+      if (description) {
+        description.classList.toggle('hidden');
+      } else {
+        description.classList.toggle('hidden');
+      }
+    }
+  </script>
+
 </body>
 
 </html>
