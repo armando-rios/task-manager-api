@@ -13,8 +13,8 @@ async function getTasks() {
 <p class="text-lg">${task.title}</p>
           </div>
           <div class="flex gap-2">
-            <button class="bg-[#89B4FA] px-3 py-1 rounded-lg hover:bg-[#74C7EC] transition">Edit</button>
-            <button class="bg-[#F38BA8] px-3 py-1 rounded-lg hover:bg-[#E06C75] transition">Delete</button>
+            <button class="bg-[#89B4FA] px-3 py-1 rounded-lg hover:bg-[#74C7EC] transition" id=${task._id} >Edit</button>
+            <button class="bg-[#F38BA8] px-3 py-1 rounded-lg hover:bg-[#E06C75] transition" id=${task._id} onclick="deleteTask(this.id)">Delete</button>
           </div>
         </div>
 <p class="hidden desc mt-2 text-sm text-[#A6ADC8]">${task.description}</p>
@@ -35,6 +35,13 @@ const createTask = async (task) => {
     .then(response => response.json()) // Convertir la respuesta en JSON
     .then(data => console.log('Éxito:', data))
     .catch(error => console.error('Error:', error));
+}
+
+const deleteTask = async (id) => {
+  await fetch(`/api/tasks/${id}`, {
+    method: "DELETE"
+  })
+  getTasks()
 }
 
 document.querySelector("#modalForm").addEventListener("submit", (e) => {
