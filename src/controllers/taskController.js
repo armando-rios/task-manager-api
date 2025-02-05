@@ -9,10 +9,21 @@ const getTasks = async (req, res) => {
   }
 }
 
-const createTask = (req, res) => {
-  const task = req.body
-  Task.create(task)
-  res.send("ok")
+const createTask = async (req, res) => {
+  try {
+    const task = await Task.create(req.body)
+    res.status(201).json({
+      status: "OK",
+      message: "Task created!",
+      task
+    })
+  } catch (error) {
+    res.status(500).json({
+      status: "ERORR",
+      message: "Error al crear la terea",
+      error: error.message
+    })
+  }
 }
 
 module.exports = { getTasks, createTask };
