@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="./app.js"></script>
 
   <script>
     function toggleTaskDetails(taskElement) {
@@ -50,6 +50,7 @@
     const openModal = document.getElementById("openModal");
     const closeModal = document.getElementById("closeModal");
     const taskModal = document.getElementById("modal-container");
+    const modalForm = document.getElementById("modalForm")
 
     openModal.addEventListener("click", () => {
       taskModal.classList.remove("hidden");

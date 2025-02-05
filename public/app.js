@@ -23,4 +23,41 @@ async function getTasks() {
   }).join("")
 }
 
+
+const createTask = async (task) => {
+  await fetch('/api/tasks/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(task)
+  })
+    .then(response => response.json()) // Convertir la respuesta en JSON
+    .then(data => console.log('Éxito:', data))
+    .catch(error => console.error('Error:', error));
+}
+
+document.querySelector("#modalForm").addEventListener("submit", (e) => {
+  e.preventDefault()
+
+  const title = document.querySelector("#title")
+  const description = document.querySelector("#description")
+
+  const task = {
+    title: title.value,
+    description: description.value
+  }
+
+  createTask(task)
+
+  title.value = ""
+  description.value = ""
+
+  getTasks()
+
+  const taskModal = document.getElementById("modal-container");
+  taskModal.classList.add("hidden");
+
+})
+
 getTasks()
