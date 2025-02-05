@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Task Manager</title>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <link href="./output.css" rel="stylesheet">
 </head>
 
@@ -12,10 +13,25 @@
   <div class="max-w-2xl mx-auto">
     <h1 class="text-3xl font-bold text-[#FAB387] mb-6">Task List</h1>
 
-    <button class="mb-4 px-4 py-2 bg-[#A6E3A1] text-[#1E1E2E] rounded-lg hover:bg-[#94E2D5] transition">+ Add
+    <button id="openModal" class="mb-4 px-4 py-2 bg-[#A6E3A1] text-[#1E1E2E] rounded-lg hover:bg-[#94E2D5] transition">+
+      Add
       Task</button>
 
     <div class="space-y-4" id="tasks">
+    </div>
+  </div>
+  <div id="modal-container" class="fixed flex inset-0 items-center justify-center bg-[#0d0d0dbb] hidden">
+    <div id="modal" class="flex flex-col gap-4 w-80 bg-[#313244] p-8 rounded-lg">
+      <div class="flex justify-between items-center">
+        <p class="text-lg font-semibold">Add new Task</p>
+        <button id="closeModal" class="p-2 font-bold hover:scale-125 cursor-pointer">X</button>
+      </div>
+      <form class="flex flex-col gap-4" id="modalForm">
+        <input placeholder="Title" class="rounded-lg bg-[#1E1E2E] p-2 text-lg" id="title">
+        <textarea rows="4" placeholder="Description" class="rounded-lg bg-[#1E1E2E] p-2 text-lg"
+          id="description"></textarea>
+        <button class="rounded-lg p-2 bg-[#A6E3A1] text-[#1E1E2E] font-semibold" type="submit">Save Task</button>
+      </form>
     </div>
   </div>
 
@@ -30,6 +46,24 @@
         description.classList.toggle('hidden');
       }
     }
+
+    const openModal = document.getElementById("openModal");
+    const closeModal = document.getElementById("closeModal");
+    const taskModal = document.getElementById("modal-container");
+
+    openModal.addEventListener("click", () => {
+      taskModal.classList.remove("hidden");
+    });
+
+    closeModal.addEventListener("click", () => {
+      taskModal.classList.add("hidden");
+    });
+
+    taskModal.addEventListener("click", (event) => {
+      if (event.target === taskModal) {
+        taskModal.classList.add("hidden");
+      }
+    });
   </script>
 
 </body>
