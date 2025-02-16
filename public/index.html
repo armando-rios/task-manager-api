@@ -1,71 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Task Manager</title>
-  <link href="./output.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentación API - Task Manager</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-[#1E1E2E] text-[#CDD6F4] font-sans p-8">
-  <div class="max-w-2xl mx-auto">
-    <h1 class="text-3xl font-bold text-[#FAB387] mb-6">Task List</h1>
+<body>
+  <div class="container">
+    <h1>📑 Documentación API - Task Manager</h1>
 
-    <button id="openModal" class="mb-4 px-4 py-2 bg-[#A6E3A1] text-[#1E1E2E] rounded-lg hover:bg-[#94E2D5] transition">+
-      Add
-      Task</button>
-
-    <div class="space-y-4" id="tasks">
-    </div>
-  </div>
-  <div id="modal-container" class="fixed flex inset-0 items-center justify-center bg-[#0d0d0dbb] hidden">
-    <div id="modal" class="flex flex-col gap-4 w-80 bg-[#313244] p-8 rounded-lg">
-      <div class="flex justify-between items-center">
-        <p class="text-lg font-semibold">Add new Task</p>
-        <button id="closeModal" class="p-2 font-bold hover:scale-125 cursor-pointer">X</button>
+    <section class="section">
+      <h2>🛠️ Autenticación</h2>
+      <div class="endpoint">
+        <h3>🔹 Registro de Usuario</h3>
+        <p><strong>POST:</strong> <code>/api/auth/register</code></p>
+        <div class="example">
+          <strong>Body (JSON)</strong>
+          <pre>
+{
+  "username": "usuario",
+  "email": "correo@ejemplo.com",
+  "password": "contraseña"
+}</pre>
+        </div>
+        <div class="response">
+          <strong>Respuesta Exitosa (201)</strong>
+          <pre>
+{
+  "message": "Usuario registrado exitosamente",
+  "userId": "abc123"
+}</pre>
+        </div>
       </div>
-      <form class="flex flex-col gap-4" id="modalForm">
-        <input placeholder="Title" class="rounded-lg bg-[#1E1E2E] p-2 text-lg" id="title">
-        <textarea rows="4" placeholder="Description" class="rounded-lg bg-[#1E1E2E] p-2 text-lg"
-          id="description"></textarea>
-        <button class="rounded-lg p-2 bg-[#A6E3A1] text-[#1E1E2E] font-semibold" type="submit">Save Task</button>
-      </form>
-    </div>
+
+      <div class="endpoint">
+        <h3>🔹 Inicio de Sesión</h3>
+        <p><strong>POST:</strong> <code>/api/auth/login</code></p>
+        <div class="example">
+          <strong>Body (JSON)</strong>
+          <pre>
+{
+  "email": "correo@ejemplo.com",
+  "password": "contraseña"
+}</pre>
+        </div>
+        <div class="response">
+          <strong>Respuesta Exitosa (200)</strong>
+          <pre>
+{
+  "message": "Inicio de sesión exitoso",
+  "token": "Bearer eyJhbGciOiJIUz..."
+}
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>📝 Gestión de Tareas</h2>
+      <div class="endpoint">
+        <h3>🔹 Crear Tarea</h3>
+        <p><strong>POST:</strong> <code>/api/tasks</code></p>
+        <p><strong>Headers:</strong> <code>Authorization: Bearer {token}</code></p>
+        <div class="example">
+          <strong>Body (JSON)</strong>
+          <pre>
+{
+  "title": "Nueva tarea",
+  "description": "Descripción de la tarea",
+  "status": "pendiente"
+}
+</pre>
+        </div>
+        <div class="response">
+          <strong>Respuesta Exitosa (201)</strong>
+          <pre>
+{
+  "message": "Tarea creada exitosamente",
+  "taskId": "12345"
+}
+</pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <h3>🔹 Obtener Todas las Tareas</h3>
+        <p><strong>GET:</strong> <code>/api/tasks</code></p>
+        <p><strong>Headers:</strong> <code>Authorization: Bearer {token}</code></p>
+        <div class="response">
+          <strong>Respuesta Exitosa (200)</strong>
+          <pre>
+[
+  {
+    "id": "12345",
+    "title": "Nueva tarea",
+    "description": "Descripción de la tarea",
+    "status": "pendiente",
+    "createdAt": "2024-02-16T12:00:00Z"
+  }
+]
+</pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <h3>🔹 Actualizar Tarea</h3>
+        <p><strong>PUT:</strong> <code>/api/tasks/{taskId}</code></p>
+        <p><strong>Headers:</strong> <code>Authorization: Bearer {token}</code></p>
+        <div class="example">
+          <strong>Body (JSON)</strong>
+          <pre>
+{
+  "title": "Título actualizado",
+  "description": "Descripción actualizada",
+  "status": "completado"
+}
+</pre>
+        </div>
+        <div class="response">
+          <strong>Respuesta Exitosa (200)</strong>
+          <pre>
+{
+  "message": "Tarea actualizada exitosamente"
+}
+</pre>
+        </div>
+      </div>
+
+      <div class="endpoint">
+        <h3>🔹 Eliminar Tarea</h3>
+        <p><strong>DELETE:</strong> <code>/api/tasks/{taskId}</code></p>
+        <p><strong>Headers:</strong> <code>Authorization: Bearer {token}</code></p>
+        <div class="response">
+          <strong>Respuesta Exitosa (200)</strong>
+          <pre>
+{
+  "message": "Tarea eliminada exitosamente"
+}
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>⚠️ Manejando Errores</h2>
+      <div class="endpoint">
+        <h3>🔹 Respuesta de Error Común</h3>
+        <div class="response">
+          <pre>
+{
+  "error": "Token inválido o no proporcionado"
+}
+</pre>
+        </div>
+      </div>
+    </section>
   </div>
-
-  <script src="./app.js"></script>
-
-  <script>
-    function toggleTaskDetails(taskElement) {
-      const description = taskElement.querySelector('p.desc');
-      if (description) {
-        description.classList.toggle('hidden');
-      } else {
-        description.classList.toggle('hidden');
-      }
-    }
-
-    const openModal = document.getElementById("openModal");
-    const closeModal = document.getElementById("closeModal");
-    const taskModal = document.getElementById("modal-container");
-    const modalForm = document.getElementById("modalForm")
-
-    openModal.addEventListener("click", () => {
-      taskModal.classList.remove("hidden");
-    });
-
-    closeModal.addEventListener("click", () => {
-      taskModal.classList.add("hidden");
-    });
-
-    taskModal.addEventListener("click", (event) => {
-      if (event.target === taskModal) {
-        taskModal.classList.add("hidden");
-      }
-    });
-  </script>
-
 </body>
 
 </html>
